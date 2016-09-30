@@ -1,11 +1,13 @@
 package Exercise4.NguyenHoaiNam;
 
 
+import java.io.Serializable;
+
 /**
  * Created by Nam on 9/30/2016.
  */
-public class NhanVien {
-    private String id;
+public class NhanVien implements Serializable{
+    private int id;
     private String hoten;
     private int tuoi;
     private Double luong;
@@ -13,18 +15,18 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String id, String hoten, int tuoi, Double luong) {
+    public NhanVien(int id, String hoten, int tuoi, Double luong){
         this.id = id;
         this.hoten = hoten;
         this.tuoi = tuoi;
         this.luong = luong;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -46,6 +48,16 @@ public class NhanVien {
 
     public Double getLuong() {
         return luong;
+    }
+
+    @Override
+    public String toString() {
+        return "NhanVien{" +
+                "id='" + id + '\'' +
+                ", hoten='" + hoten + '\'' +
+                ", tuoi=" + tuoi +
+                ", luong=" + luong +
+                '}';
     }
 
     public void setLuong(Double luong) {
