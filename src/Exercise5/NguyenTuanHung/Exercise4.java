@@ -20,6 +20,7 @@ public class Exercise4 extends JApplet {
   
     @Override
     public void init() {
+        setSize(500, 300);
         sp = new ScorllPaint();
         add(sp);
         
@@ -42,18 +43,23 @@ class myCanva extends Canvas{
     }
     @Override
     public void paint(Graphics g){
-        g.setColor(Color.red);
+        g.setColor(Color.blue);
         g.drawOval(5, 10, 200, 200);
         g.fillOval(5, 10, 200, 200);
         
         g.setColor(Color.green);
         g.drawOval(20, 200, 100, 100);
         g.fillOval(20, 200, 100, 100);
+        
+        g.setColor(Color.red);
+        g.fillOval(200, 20, 100, 100);
     }
 }
 class ScorllPaint extends ScrollPane{
     public ScorllPaint(){
+        setEnabled(true);
         myCanva mc = new myCanva();
+        mc.setSize(600, 600);
         add(mc);
     }
 }
