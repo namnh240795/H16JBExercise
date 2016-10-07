@@ -1,0 +1,49 @@
+implements Serializable{
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getHoten() {
+        return hoten;
+    }
+
+    public void setHoten(String hoten) {
+        this.hoten = hoten;
+    }
+
+    public int getTuoi() {
+        return tuoi;
+    }
+
+    public void setTuoi(int tuoi) {
+        this.tuoi = tuoi;
+    }
+
+    public Double getLuong() {
+        return luong;
+    }
+
+    public void setLuong(Double luong) {
+        this.luong = luong;
+    }
+    private String hoten;
+    private int tuoi;
+    private Double luong;
+
+    @Override
+    public String toString() {
+        return "Nhanvien{" + "id=" + id + ", hoten=" + hoten + ", tuoi=" + tuoi + ", luong=" + luong + '}';
+    }
+
+    public Nhanvien(int id, String hoten, int tuoi) {
+        this.id = id;
+        this.hoten = hoten;
+        this.tuoi = tuoi;
+    }
+}
