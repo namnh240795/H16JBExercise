@@ -10,7 +10,9 @@ public class L4Main {
     public static void main(String[] args){
         L4Main main = new L4Main();
         try{
-            main.writeMultipleType();
+            main.writeNhanVien();
+            main.readNhanVien();
+            main.handleNhanVien();
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
@@ -64,23 +66,28 @@ public class L4Main {
         int i = 0;
         while(i<3) {
             System.out.println("Nhap thong tin cua nhan vien: ");
+            System.out.printf("Nhap ma cua nhan vien: ");
+            int maNhanVien = Integer.parseInt(reader.readLine());
             System.out.printf("Nhap ho ten cua nhan vien: ");
             String hoTen = reader.readLine();
-            System.out.println("Nhap tuoi cua nhan vien: ");
+            System.out.printf("Nhap tuoi cua nhan vien: ");
             int tuoi = Integer.parseInt(reader.readLine());
             System.out.printf("Nhap luong cua nhan vien: ");
             double luong = Double.parseDouble(reader.readLine());
-            NhanVien nv = new NhanVien(hoTen, tuoi, luong);
+            NhanVien nv = new NhanVien(maNhanVien, hoTen, tuoi, luong);
             writer.write(nv.toString()+"\n");
             i++;
         }
+        writer.close();
     }
 
     private void docNhanVien() throws IOException{
         try {
-            FileReader fileReader = new FileReader("nhanvien.txt");
-            BufferedReader reader = new BufferedReader(fileReader);
-            System.out.println(reader.readLine());
+            BufferedReader reader = new BufferedReader(new FileReader("nhanvien.txt"));
+            while(reader.ready()) {
+                System.out.println(reader.readLine());
+            }
+            reader.close();
         } catch (FileNotFoundException e) {
             System.err.println("File not found");
         }
@@ -88,29 +95,33 @@ public class L4Main {
 
 
     //Bai 5
+    private int len = 3;
     private void writeNhanVien()throws IOException{
-        NhanVien nv[] = new NhanVien[3];
+        NhanVien nv[] = new NhanVien[len];
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         for (int i = 0; i < nv.length; i++) {
             System.out.println("Nhap thong tin cua nhan vien: ");
+            System.out.printf("Nhap ma cua nhan vien: ");
+            int maNhanVien = Integer.parseInt(reader.readLine());
             System.out.printf("Nhap ho ten cua nhan vien: ");
             String hoTen = reader.readLine();
-            System.out.println("Nhap tuoi cua nhan vien: ");
+            System.out.print("Nhap tuoi cua nhan vien: ");
             int tuoi = Integer.parseInt(reader.readLine());
             System.out.printf("Nhap luong cua nhan vien: ");
             double luong = Double.parseDouble(reader.readLine());
-            nv[i] = new NhanVien(hoTen, tuoi, luong);
+            nv[i] = new NhanVien(maNhanVien, hoTen, tuoi, luong);
         }
 
         ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("nhanvien.dat"));
         for (int i = 0; i < nv.length; i++) {
             stream.writeObject(nv[i]);
         }
+        stream.close();
     }
 
     private void readNhanVien() throws IOException{
         ObjectInputStream stream = new ObjectInputStream(new FileInputStream("nhanvien.dat"));
-        NhanVien nv[] = new NhanVien[3];
+        NhanVien nv[] = new NhanVien[len];
         for (int i = 0; i < nv.length; i++) {
             try {
                 nv[i] = (NhanVien) stream.readObject();
@@ -119,12 +130,12 @@ public class L4Main {
                 e.printStackTrace();
             }
         }
-
+        stream.close();
     }
 
     private void handleNhanVien() throws IOException{
         ObjectInputStream stream = new ObjectInputStream(new FileInputStream("nhanvien.dat"));
-        NhanVien nv[] = new NhanVien[3];
+        NhanVien nv[] = new NhanVien[len];
         for (int i = 0; i < nv.length; i++) {
             try {
                 nv[i] = (NhanVien) stream.readObject();
@@ -132,6 +143,7 @@ public class L4Main {
                 e.printStackTrace();
             }
         }
+        stream.close();
         int maxMaNhanVien = 0;
         double sumLuong = 0;
         for (int i = 0; i < nv.length; i++) {

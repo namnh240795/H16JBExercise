@@ -1,18 +1,20 @@
 package Lesson04;
 
+import java.io.Serializable;
+
 /**
  * Created by Dzung on 10/2/2016.
  */
-public class NhanVien {
+public class NhanVien implements Serializable{
     //Variable
-    private static int maNhanVien = 0;
+    private int maNhanVien;
     private String hoTen;
     private int tuoi;
     private double luong;
 
     //Constructor
-    public NhanVien(String hoTen, int tuoi, double luong) {
-        this.maNhanVien++;
+    public NhanVien(int maNhanVien, String hoTen, int tuoi, double luong) {
+        this.maNhanVien = maNhanVien;
         this.hoTen = hoTen;
         this.tuoi = tuoi;
         this.luong = luong;
@@ -48,6 +50,6 @@ public class NhanVien {
     }
 
     public String toString(){
-        return String.format("nhan vien so %d: $s, %d tuoi, luong: %f",this.maNhanVien,this.hoTen,this.tuoi,this.luong);
+        return String.format("nhan vien so "+maNhanVien+": "+hoTen+", "+tuoi+" tuoi, luong: "+luong);
     }
 }
